@@ -1,10 +1,7 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <Navigation />
+    <!-- <Collection /> -->
   </div>
 </template>
 
@@ -30,3 +27,16 @@
   }
 }
 </style>
+<script>
+// @ is an alias to /src
+import Navigation from "@/components/Navigation.vue";
+// import Collection from "./views/Collection.vue";
+
+export default {
+  name: "App",
+  components: {
+    Navigation,
+    // Collection,
+  },
+};
+</script>
