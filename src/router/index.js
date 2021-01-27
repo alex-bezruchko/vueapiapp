@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Collection from "../views/Collection.vue";
+import Post from "../views/Post.vue";
+
 
 
 Vue.use(VueRouter);
@@ -21,6 +23,12 @@ const routes = [
     // component: () =>
     //   import(/* webpackChunkName: "about" */ "../views/Collection.vue")
     component: Collection
+  },
+  {
+    path: "/post/:id",
+    name: "postDetails",
+    component: Post,
+    props: true
   }
 ];
 
