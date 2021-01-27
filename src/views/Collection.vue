@@ -13,16 +13,16 @@
 export default {
   data() {
     return {
-      posts: [],
+      posts: []
     };
   },
   mounted() {
     fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => res.json())
-      .then((data) => (this.posts = data))
-      .catch((err) => console.log(err.message));
+      .then(res => res.json())
+      .then(data => (this.posts = data))
+      .catch(err => console.log(err.message));
   },
-  name: "Collection",
+  name: "Collection"
 };
 </script>
 

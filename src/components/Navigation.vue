@@ -28,8 +28,8 @@
 export default {
   name: "Navigation",
   props: {
-    msg: String,
-  },
+    msg: String
+  }
 };
 </script>
 
