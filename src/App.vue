@@ -2,6 +2,7 @@
   <div id="app">
     <Navigation />
     <!-- <Collection /> -->
+    <router-view />
   </div>
 </template>
 
@@ -26,6 +27,9 @@
     }
   }
 }
+.page-title {
+  margin: 2rem auto;
+}
 </style>
 <script>
 // @ is an alias to /src
@@ -35,8 +39,8 @@ import Navigation from "@/components/Navigation.vue";
 export default {
   name: "App",
   components: {
-    Navigation
+    Navigation,
     // Collection,
-  }
+  },
 };
 </script>

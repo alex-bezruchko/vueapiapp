@@ -1,6 +1,6 @@
 <template>
-  <b-container fluid>
-    <h1>Collection</h1>
+  <b-container>
+    <h1 class="page-title">Collection</h1>
     <b-card v-for="post in posts" :key="post.id">
       <router-link :to="{ name: 'postDetails', params: { id: post.id } }"
         ><h1>{{ post.title }}</h1>
@@ -13,16 +13,16 @@
 export default {
   data() {
     return {
-      posts: []
+      posts: [],
     };
   },
   mounted() {
     fetch("https://jsonplaceholder.typicode.com/posts")
-      .then(res => res.json())
-      .then(data => (this.posts = data))
-      .catch(err => console.log(err.message));
+      .then((res) => res.json())
+      .then((data) => (this.posts = data))
+      .catch((err) => console.log(err.message));
   },
-  name: "Collection"
+  name: "Collection",
 };
 </script>
 

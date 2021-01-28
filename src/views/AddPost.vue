@@ -4,8 +4,8 @@
       Post Addedd Successfully. Redirecting...
     </b-alert>
     <div v-if="!submitted">
+      <h1 class="page-title">Add a Post</h1>
       <div class="form-group">
-        <label for="title">Title</label>
         <input
           type="text"
           class="form-control"
@@ -13,11 +13,11 @@
           required
           v-model="post.title"
           name="title"
+          placeholder="Title"
         />
       </div>
 
       <div class="form-group">
-        <label for="body">Body</label>
         <textarea
           class="form-control"
           id="body"
@@ -25,6 +25,7 @@
           v-model="post.body"
           name="body"
           rows="15"
+          placeholder="Body"
         />
       </div>
 
@@ -92,7 +93,7 @@ export default {
 
 <style>
 .submit-form {
-  max-width: 300px;
-  margin: auto;
+  max-width: 80%;
+  margin: 2rem auto;
 }
 </style>
