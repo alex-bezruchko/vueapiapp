@@ -1,32 +1,37 @@
 <template>
   <b-container>
     <header>
+      <!-- Successfull deletion alert -->
       <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>
         Post Deleted Successfully. Redirecting...
       </b-alert>
-      <!-- <b-button @click="showDismissibleAlert = true" variant="info" class="m-1">
-        Show dismissible alert ({{
-          showDismissibleAlert ? "visible" : "hidden"
-        }})
-      </b-button> -->
     </header>
-    <b-card v-if="post">
-      <!-- Delete Post -->
+
+    <!-- Edit/Delete Action buttons -->
+    <b-container class="post-actions">
+      <router-link :to="{ name: 'editPost', params: { id: this.post.id } }"
+        ><b-icon icon="pencil" scale="2" variant="warning"> </b-icon
+      ></router-link>
       <b-icon
         icon="x-circle"
         scale="2"
         variant="danger"
         v-on:click="deletePost(post.id)"
       ></b-icon>
+    </b-container>
+
+    <b-card v-if="post">
       <!-- Post title -->
-      <!-- {{ this.id }} -->
       <h3>
         {{ post.title }}
       </h3>
-      <!-- Post body -->
 
+      <!-- Post body -->
       <p>{{ post.body }}</p>
+
       <div class="divider"></div>
+
+      <!-- Comment Section -->
       <b-container
         ><b-icon icon="BIconChatLeftText"></b-icon>Comments
         {{ commentsTotal }}</b-container
@@ -47,6 +52,7 @@ import router from "./../router";
 
 export default {
   props: ["id"],
+  name: "Post",
   data() {
     return {
       post: null,
@@ -59,15 +65,16 @@ export default {
     deletePost(post_id) {
       fetch("https://jsonplaceholder.typicode.com/posts/" + post_id, {
         method: "DELETE",
-      }).then(() => {
-        this.showDismissibleAlert = true;
-        setTimeout(function() {
-          router.push("/collection");
-        }, 1800);
-      });
-      // .then(
-
-      // );
+      })
+        .then(() => {
+          this.showDismissibleAlert = true;
+          setTimeout(function() {
+            router.push("/collection");
+          }, 1800);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
@@ -77,7 +84,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.id);
     fetch("https://jsonplaceholder.typicode.com/posts/" + this.id)
       .then((res) => res.json())
       .then((data) => (this.post = data))
@@ -89,7 +95,6 @@ export default {
       .then((data) => (this.commentsTotal = data.length))
       .catch((err) => console.log(err.message));
   },
-  name: "Post",
 };
 </script>
 
@@ -100,18 +105,17 @@ export default {
   max-height: 1px;
   margin-bottom: 2rem;
 }
-// .card-body {
-//   h3,
-//   p {
-//     padding-right: 2rem;
-//   }
-// }
 h3,
 p,
 .list-group-item {
   text-align: left;
 }
-.bi-x-circle {
-  float: right;
+.post-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.bi-x-circle,
+.bi-pencil {
+  padding: 2rem;
 }
 </style>

@@ -12,9 +12,6 @@
           <b-nav-item
             ><router-link to="/add-post">Add Post</router-link></b-nav-item
           >
-          <b-nav-item
-            ><router-link to="/delete">Delete Post</router-link></b-nav-item
-          >
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -24,11 +21,10 @@
 </template>
 
 <script>
+// import route from "vue-router";
+
 export default {
   name: "Navigation",
-  props: {
-    msg: String,
-  },
 };
 </script>
 
