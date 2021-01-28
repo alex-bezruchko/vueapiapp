@@ -10,7 +10,7 @@
             ><router-link to="/collection">Collection</router-link></b-nav-item
           >
           <b-nav-item
-            ><router-link to="/edit">Edit Post</router-link></b-nav-item
+            ><router-link to="/add-post">Add Post</router-link></b-nav-item
           >
           <b-nav-item
             ><router-link to="/delete">Delete Post</router-link></b-nav-item
@@ -28,8 +28,8 @@
 export default {
   name: "Navigation",
   props: {
-    msg: String
-  }
+    msg: String,
+  },
 };
 </script>
 
