@@ -1,34 +1,45 @@
 <template>
   <b-container>
     <h1 class="page-title">Collection</h1>
-    <b-card v-for="post in posts" :key="post.id">
-      <router-link :to="{ name: 'postDetails', params: { id: post.id } }"
-        ><h1>{{ post.title }}</h1>
-      </router-link>
-    </b-card>
+    <b-row class="collection" align-h="center">
+      <b-col cols="8" v-for="post in collection" :key="post.id">
+        <b-card>
+          <router-link :to="{ name: 'postDetails', params: { id: post.id } }"
+            ><h3>{{ post.title }}</h3>
+          </router-link>
+        </b-card>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
-  data() {
-    return {
-      posts: [],
-    };
+  name: "collection",
+  methods: {
+    ...mapActions(["fetchPosts"]),
   },
-  mounted() {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => res.json())
-      .then((data) => (this.posts = data))
-      .catch((err) => console.log(err.message));
+  computed: mapGetters(["collection"]),
+  created() {
+    this.fetchPosts();
   },
-  name: "Collection",
 };
 </script>
 
 <style lang="scss" scoped>
-.card-body h1 {
-  text-align: left;
-  text-transform: capitalize;
+.card-body {
+  h3 {
+    text-align: left;
+    text-transform: capitalize;
+  }
+  a {
+    color: #000;
+  }
+  a:hover {
+    text-decoration: none;
+    color: blue;
+  }
 }
 </style>

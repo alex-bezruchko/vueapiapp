@@ -8,7 +8,7 @@
     </header>
 
     <!-- Edit/Delete Action buttons -->
-    <b-container class="post-actions">
+    <b-container v-if="post" class="post-actions">
       <router-link :to="{ name: 'editPost', params: { id: this.post.id } }"
         ><b-icon icon="pencil" scale="2" variant="warning"> </b-icon
       ></router-link>

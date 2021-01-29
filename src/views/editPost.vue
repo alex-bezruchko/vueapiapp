@@ -5,15 +5,14 @@
     <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
       Post Edited Successfully. Redirecting...
     </b-alert>
-    <div v-if="!submitted || post">
+    <div v-if="!submitted && post">
       <h1 class="page-title">Edit the Post</h1>
       <div class="form-group">
         <input
           type="text"
           class="form-control"
           id="title"
-          required
-          v-value="post.title"
+          required="post.title"
           v-model="post.title"
           name="title"
           placeholder="Title"
@@ -24,8 +23,7 @@
         <textarea
           class="form-control"
           id="body"
-          required
-          value="post.body"
+          required="post.body"
           v-model="post.body"
           name="body"
           rows="15"
@@ -36,10 +34,10 @@
       <button @click="savePost" class="btn btn-success">Submit</button>
     </div>
 
-    <div v-else>
+    <!-- <div v-else>
       <h4>You submitted successfully!</h4>
       <button class="btn btn-success" @click="newPost">Add</button>
-    </div>
+    </div> -->
   </div>
 </template>
 

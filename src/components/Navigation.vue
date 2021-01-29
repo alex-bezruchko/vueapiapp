@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container fluid>
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -30,6 +30,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+}
 h3 {
   margin: 40px 0 0;
 }
