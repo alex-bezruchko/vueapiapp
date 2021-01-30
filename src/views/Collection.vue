@@ -29,7 +29,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.col-8 {
+  margin-bottom: 1rem;
+}
 .card-body {
+  padding-bottom: 0.1rem;
+
   h3 {
     text-align: left;
     text-transform: capitalize;

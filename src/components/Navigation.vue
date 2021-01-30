@@ -12,6 +12,14 @@
           <b-nav-item
             ><router-link to="/add-post">Add Post</router-link></b-nav-item
           >
+          <b-nav-item
+            ><b-icon
+              v-if="favCollection"
+              icon="heart"
+              variant="success"
+            ></b-icon
+            >+ {{ favCollection.length }}</b-nav-item
+          >
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -22,9 +30,22 @@
 
 <script>
 // import route from "vue-router";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "Navigation",
+  name: "favCollection",
+  data() {
+    return {
+      favPosts: [],
+    };
+  },
+  methods: {
+    ...mapActions(["fetchFavPosts"]),
+  },
+  computed: mapGetters(["favCollection"]),
+  created() {
+    this.fetchFavPosts();
+  },
 };
 </script>
 

@@ -18,6 +18,12 @@
         variant="danger"
         v-on:click="deletePost(post.id)"
       ></b-icon>
+      <b-icon
+        icon="clipboard-plus"
+        scale="2"
+        variant="info"
+        v-on:click="onAddNewFavourite()"
+      ></b-icon>
     </b-container>
 
     <b-card v-if="post">
@@ -49,6 +55,7 @@
 
 <script>
 import router from "./../router";
+import { mapActions } from "vuex";
 
 export default {
   props: ["id"],
@@ -76,11 +83,19 @@ export default {
           console.log(err);
         });
     },
+
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },
+
     showAlert() {
       this.dismissCountDown = this.dismissSecs;
+    },
+
+    ...mapActions(["addFavourite"]),
+
+    onAddNewFavourite() {
+      this.addFavourite(this.post);
     },
   },
   mounted() {
@@ -114,8 +129,10 @@ p,
   display: flex;
   justify-content: flex-end;
 }
+// .b-icon-bi,
 .bi-x-circle,
-.bi-pencil {
+.bi-pencil,
+.bi-clipboard-plus {
   padding: 2rem;
 }
 </style>

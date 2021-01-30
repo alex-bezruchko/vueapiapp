@@ -12,24 +12,44 @@ export default new Vuex.Store({
     favouritePosts: [],
     allPosts: []
   },
-  mutations: {
-    setPosts: (state, posts) => (
-      state.allPosts = posts
-    ),
-    // setNewFavourite(state, payload) {
-    //   state.favouritePosts.push(payload)
-    // }
-  },
   actions: {
     async fetchPosts({ commit }) {
       const response = await axios.get(url);
       commit("setPosts", response.data)
     },
+    async fetchFavPosts({ commit }) {
+      // const response = await axios.get(url);
+      // console.log(response)
+      commit("setFavPosts", [])
+    },
+
+    async addFavourite({ commit }, post) {
+      // const response = await axios.post("http://localhost:3000/users", user);
+      commit("addNewFavourite", post)
+      console.log('click')
+      console.log(this.state.favouritePosts)
+
+    },
   },
+  mutations: {
+    setPosts: (state, posts) => (
+      state.allPosts = posts
+    ),
+    setFavPosts: (state, posts) => (
+      state.favouritePosts = posts
+    ),
+    addNewFavourite: (state, newFav) => state.favouritePosts.unshift(newFav),
+    // setNewFavourite(state, payload) {
+    //   state.favouritePosts.push(payload)
+    // }
+  },
+
   modules: {
 
   },
   getters: {
-    collection: state => state.allPosts
+    collection: state => state.allPosts,
+    favCollection: state => state.favouritePosts
+
   }
 });
