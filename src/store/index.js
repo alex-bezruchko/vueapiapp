@@ -49,7 +49,7 @@ export default new Vuex.Store({
   },
   getters: {
     collection: state => state.allPosts,
-    favCollection: state => state.favouritePosts
+    favourites: state => state.favouritePosts
 
   }
 });

@@ -1,8 +1,8 @@
 <template>
   <b-container>
-    <h1 class="page-title">Collection</h1>
+    <h1 class="page-title">Favourites</h1>
     <b-row class="collection" align-h="center">
-      <b-col cols="8" v-for="post in collection" :key="post.id">
+      <b-col cols="8" v-for="post in favourites" :key="post.id">
         <b-card>
           <router-link :to="{ name: 'postDetails', params: { id: post.id } }"
             ><h3>{{ post.title }}</h3>
@@ -17,14 +17,14 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "collection",
+  name: "favourites",
   methods: {
-    ...mapActions(["fetchPosts"]),
+    ...mapActions(["fetchFavPosts"]),
   },
-  computed: mapGetters(["collection"]),
-  created() {
-    this.fetchPosts();
-  },
+  computed: mapGetters(["favourites"]),
+  //   created() {
+  //     this.fetchFavPosts();
+  //   },
 };
 </script>
 
@@ -44,7 +44,7 @@ export default {
   }
   a:hover {
     text-decoration: none;
-    color: #42b983;
+    color: blue;
   }
 }
 </style>

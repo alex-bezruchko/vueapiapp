@@ -10,15 +10,14 @@
             ><router-link to="/collection">Collection</router-link></b-nav-item
           >
           <b-nav-item
+            ><router-link to="/favourites">Favourites</router-link></b-nav-item
+          >
+          <b-nav-item
             ><router-link to="/add-post">Add Post</router-link></b-nav-item
           >
           <b-nav-item
-            ><b-icon
-              v-if="favCollection"
-              icon="heart"
-              variant="success"
-            ></b-icon
-            >+ {{ favCollection.length }}</b-nav-item
+            ><b-icon v-if="favourites" icon="heart" variant="success"></b-icon>+
+            {{ favourites.length }}</b-nav-item
           >
         </b-navbar-nav>
       </b-collapse>
@@ -33,7 +32,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "favCollection",
+  name: "Navigation",
   data() {
     return {
       favPosts: [],
@@ -42,7 +41,7 @@ export default {
   methods: {
     ...mapActions(["fetchFavPosts"]),
   },
-  computed: mapGetters(["favCollection"]),
+  computed: mapGetters(["favourites"]),
   created() {
     this.fetchFavPosts();
   },

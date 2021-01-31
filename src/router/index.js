@@ -2,8 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Collection from "../views/Collection.vue";
+import Favourites from "../views/Favourites.vue";
+
 import AddPost from "../views/AddPost.vue";
 import editPost from "../views/editPost.vue";
+
 
 import Post from "../views/Post.vue";
 
@@ -24,6 +27,16 @@ const routes = [
     // component: () =>
     //   import(/* webpackChunkName: "about" */ "../views/Collection.vue")
     component: Collection
+  },
+  {
+    path: "/favourites",
+    name: "Favourites",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    // component: () =>
+    //   import(/* webpackChunkName: "about" */ "../views/favourites.vue")
+    component: Favourites
   },
   {
     path: "/post/:id",

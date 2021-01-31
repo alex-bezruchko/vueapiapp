@@ -129,7 +129,6 @@ p,
   display: flex;
   justify-content: flex-end;
 }
-// .b-icon-bi,
 .bi-x-circle,
 .bi-pencil,
 .bi-clipboard-plus {
