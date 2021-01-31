@@ -19,10 +19,18 @@
         v-on:click="deletePost(post.id)"
       ></b-icon>
       <b-icon
-        icon="clipboard-plus"
+        v-show="!isFav"
+        icon="bookmark-plus"
         scale="2"
         variant="info"
         v-on:click="onAddNewFavourite()"
+      ></b-icon>
+      <b-icon
+        v-show="isFav"
+        icon="bookmark-dash"
+        scale="2"
+        variant="info"
+        v-on:click="onRemoveFavourite()"
       ></b-icon>
     </b-container>
 
@@ -55,7 +63,7 @@
 
 <script>
 import router from "./../router";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   props: ["id"],
@@ -66,6 +74,7 @@ export default {
       comments: null,
       commentsTotal: null,
       showDismissibleAlert: false,
+      isFav: false,
     };
   },
   methods: {
@@ -93,15 +102,31 @@ export default {
     },
 
     ...mapActions(["addFavourite"]),
+    ...mapActions(["removeFavourite"]),
+    ...mapActions(["fetchFavPosts"]),
 
     onAddNewFavourite() {
       this.addFavourite(this.post);
+      this.isFav = true;
+    },
+    onRemoveFavourite() {
+      this.removeFavourite(this.post.id);
+      this.isFav = false;
     },
   },
+  computed: mapGetters(["favourites"]),
   mounted() {
     fetch("https://jsonplaceholder.typicode.com/posts/" + this.id)
       .then((res) => res.json())
-      .then((data) => (this.post = data))
+      .then((data) => {
+        this.post = data;
+        // Check if Post is favourite
+        for (let i = 0; i < this.favourites.length; i++) {
+          if (this.favourites[i].id === this.post.id) {
+            this.isFav = true;
+          }
+        }
+      })
       .catch((err) => console.log(err.message));
 
     fetch("https://jsonplaceholder.typicode.com/posts/" + this.id + "/comments")
@@ -110,6 +135,7 @@ export default {
       .then((data) => (this.commentsTotal = data.length))
       .catch((err) => console.log(err.message));
   },
+  created() {},
 };
 </script>
 
@@ -131,7 +157,8 @@ p,
 }
 .bi-x-circle,
 .bi-pencil,
-.bi-clipboard-plus {
+.bi-bookmark-plus,
+.bi-bookmark-dash {
   padding: 2rem;
 }
 </style>
