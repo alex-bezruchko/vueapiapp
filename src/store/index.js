@@ -19,23 +19,16 @@ export default new Vuex.Store({
     },
     async fetchFavPosts({ commit }) {
       // const response = await axios.get(url);
-      // console.log(response)
       commit("setFavPosts", [])
     },
 
     async addFavourite({ commit }, post) {
       // const response = await axios.post("http://localhost:3000/users", user);
       commit("addNewFavourite", post)
-      console.log('click')
-      console.log(this.state.favouritePosts)
-
     },
     async removeFavourite({ commit }, id) {
       // const response = await axios.post("http://localhost:3000/users", user);
       commit("removeFavourite", id)
-      console.log('click')
-      console.log(this.state.favouritePosts)
-
     },
   },
   mutations: {

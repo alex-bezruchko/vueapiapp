@@ -58,11 +58,15 @@
         >
       </b-list-group>
     </b-card>
+    <b-container v-if="!post">
+      <img src="./../assets/loading.gif" />
+    </b-container>
   </b-container>
 </template>
 
 <script>
 import router from "./../router";
+// import loading from "./../assets/loading.gif"
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -145,6 +149,11 @@ export default {
   height: 1px;
   max-height: 1px;
   margin-bottom: 2rem;
+}
+img {
+  max-height: 150px;
+  height: 150px;
+  margin-top: 100px;
 }
 h3,
 p,
