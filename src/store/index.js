@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     newFavourite: {},
     favouritePosts: [],
-    allPosts: [],
+    collection: [],
     collectionLoading: false
   },
   actions: {
@@ -23,26 +23,21 @@ export default new Vuex.Store({
         commit("setPosts", response.data)
       } else {
         commit("setCollectionLoading", false)
-
       }
     },
     async fetchFavPosts({ commit }) {
-      // const response = await axios.get(url);
       commit("setFavPosts", [])
     },
-
     async addFavourite({ commit }, post) {
-      // const response = await axios.post("http://localhost:3000/users", user);
       commit("addNewFavourite", post)
     },
     async removeFavourite({ commit }, id) {
-      // const response = await axios.post("http://localhost:3000/users", user);
       commit("removeFavourite", id)
     },
   },
   mutations: {
     setPosts: (state, posts) => (
-      state.allPosts = posts
+      state.collection = posts
     ),
     setCollectionLoading: (state, loading) => (
       state.collectionLoading = loading
@@ -51,24 +46,16 @@ export default new Vuex.Store({
       state.favouritePosts = favPosts
     ),
     addNewFavourite: (state, newFav) => state.favouritePosts.unshift(newFav),
-    // setNewFavourite(state, payload) {
-    //   state.favouritePosts.push(payload)
-    // }
-    // removeFavourite: (state, id) => state.favouritePosts.unshift(id),
     removeFavourite: (state, id) => (
       state.favouritePosts.filter(post => post.id !== id),
       state.favouritePosts.splice(post => post.id, 1)
     )
-
   },
-
   modules: {
-
   },
   getters: {
-    collection: state => state.allPosts,
+    collection: state => state.collection,
     favourites: state => state.favouritePosts,
     collectionLoading: state => state.collectionLoading
-
   }
 });

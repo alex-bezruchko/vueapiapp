@@ -1,10 +1,13 @@
 <template>
   <div class="submit-form">
-    <!-- Successfull deletion alert -->
+    <!-- Successfull edit alert -->
 
     <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
       Post Edited Successfully. Redirecting...
     </b-alert>
+
+    <!-- Edit post input -->
+
     <div v-if="!submitted && post">
       <h1 class="page-title">Edit the Post</h1>
       <div class="form-group">
@@ -31,13 +34,10 @@
         />
       </div>
 
+      <!-- Submit edit button -->
+
       <button @click="savePost" class="btn btn-success">Submit</button>
     </div>
-
-    <!-- <div v-else>
-      <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" @click="newPost">Add</button>
-    </div> -->
   </div>
 </template>
 
@@ -45,7 +45,7 @@
 import router from "./../router";
 
 export default {
-  name: "editPost",
+  name: "EditPost", // todo: rename to start with a capital letter like remaining components and files
   props: ["id"],
 
   data() {
@@ -64,30 +64,32 @@ export default {
   },
   methods: {
     savePost() {
-      fetch("https://jsonplaceholder.typicode.com/posts", {
-        method: "PUT",
-        body: JSON.stringify({
-          title: this.post.title,
-          body: this.post.body,
-          userId: this.post.userId,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      }).then((response) => {
-        if (response) {
-          this.show = true;
-          this.showDismissibleAlert = true;
-          setTimeout(function() {
-            router.push("/collection");
-
-            // Console log response of successfully post
-            console.log(response);
-          }, 1800);
-        } else {
-          this.show = false;
+      fetch(
+        `https://jsonplaceholder.typicode.com/posts/${this.$route.params.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            title: this.post.title,
+            body: this.post.body,
+            userId: this.post.userId,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
         }
-      });
+      )
+        .then((response) => {
+          if (response) {
+            this.show = true;
+            this.showDismissibleAlert = true;
+            setTimeout(function() {
+              router.push("/collection");
+            }, 1800);
+          } else {
+            this.show = false;
+          }
+        })
+        .catch((err) => console.log(err.message));
     },
   },
 };

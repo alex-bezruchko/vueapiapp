@@ -67,20 +67,24 @@ export default {
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
-      }).then((response) => {
-        if (response) {
-          this.show = true;
-          this.showDismissibleAlert = true;
-          setTimeout(function() {
-            router.push("/collection");
+      })
+        .then((response) => {
+          if (response) {
+            this.show = true;
+            this.showDismissibleAlert = true;
+            setTimeout(function() {
+              router.push("/collection");
 
-            // Console log response of successfully post
-            console.log(response);
-          }, 1800);
-        } else {
-          this.show = false;
-        }
-      });
+              // Console log response of successfully post
+              console.log(response);
+            }, 1800);
+          } else {
+            this.show = false;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        }); // todo: add catch to catch an error
     },
 
     newPost() {

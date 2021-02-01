@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     deletePost(post_id) {
-      fetch("https://jsonplaceholder.typicode.com/posts/" + post_id, {
+      fetch(`https://jsonplaceholder.typicode.com/posts/${post_id}`, {
         method: "DELETE",
       })
         .then(() => {
@@ -122,7 +122,7 @@ export default {
   computed: mapGetters(["favourites"]),
   mounted() {
     this.loading = true;
-    fetch("https://jsonplaceholder.typicode.com/posts/" + this.id)
+    fetch(`https://jsonplaceholder.typicode.com/posts/${this.id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data) {
@@ -141,7 +141,7 @@ export default {
       })
       .catch((err) => console.log(err.message));
 
-    fetch("https://jsonplaceholder.typicode.com/posts/" + this.id + "/comments")
+    fetch(`https://jsonplaceholder.typicode.com/posts/${this.id}/comments`)
       .then((res) => res.json())
       .then((data) => (this.comments = data))
       .then((data) => (this.commentsTotal = data.length))
