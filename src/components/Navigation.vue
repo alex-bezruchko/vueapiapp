@@ -15,9 +15,9 @@
           <b-nav-item
             ><router-link to="/add-post">Add Post</router-link></b-nav-item
           >
-          <b-nav-item
-            ><b-icon v-if="favourites" icon="heart" variant="success"></b-icon>+
-            {{ favourites.length }}</b-nav-item
+          <b-nav-item disabled
+            ><b-icon v-if="favourites" icon="heart" variant="success"></b-icon>
+            + {{ favourites.length }}</b-nav-item
           >
         </b-navbar-nav>
       </b-collapse>
@@ -69,8 +69,9 @@ a {
   color: #42b983;
 }
 .navbar-dark .navbar-nav .nav-link {
-  color: red;
+  color: #fff;
   text-align: center;
+  font-weight: bold;
 }
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-collapse {
