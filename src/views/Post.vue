@@ -58,7 +58,7 @@
         >
       </b-list-group>
     </b-card>
-    <b-container v-if="!post">
+    <b-container v-if="loading">
       <img src="./../assets/loading.gif" />
     </b-container>
   </b-container>
@@ -79,6 +79,7 @@ export default {
       commentsTotal: null,
       showDismissibleAlert: false,
       isFav: false,
+      loading: false,
     };
   },
   methods: {
@@ -120,15 +121,22 @@ export default {
   },
   computed: mapGetters(["favourites"]),
   mounted() {
+    this.loading = true;
     fetch("https://jsonplaceholder.typicode.com/posts/" + this.id)
       .then((res) => res.json())
       .then((data) => {
-        this.post = data;
-        // Check if Post is favourite
-        for (let i = 0; i < this.favourites.length; i++) {
-          if (this.favourites[i].id === this.post.id) {
-            this.isFav = true;
+        if (data) {
+          this.loading = false;
+          this.post = data;
+          // Check if Post is favourite
+          for (let i = 0; i < this.favourites.length; i++) {
+            if (this.favourites[i].id === this.post.id) {
+              this.isFav = true;
+            }
           }
+        } else {
+          this.loading = false;
+          this.post = null;
         }
       })
       .catch((err) => console.log(err.message));
