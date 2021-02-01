@@ -1,7 +1,10 @@
 <template>
   <b-container>
     <h1 class="page-title">Collection</h1>
-    <b-row class="collection" align-h="center">
+    <b-container v-if="collectionLoading">
+      <img src="./../assets/loading.gif" />
+    </b-container>
+    <b-row v-if="collection" class="collection" align-h="center">
       <b-col cols="8" v-for="post in collection" :key="post.id">
         <b-card>
           <router-link :to="{ name: 'postDetails', params: { id: post.id } }"
@@ -18,17 +21,29 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "collection",
+  data() {
+    return {
+      loading: true,
+    };
+  },
   methods: {
     ...mapActions(["fetchPosts"]),
   },
-  computed: mapGetters(["collection"]),
+  computed: mapGetters(["collection", "collectionLoading"]),
   created() {
+    // this.loading = true;
     this.fetchPosts();
+    // this.loading = false;
   },
 };
 </script>
 
 <style lang="scss" scoped>
+img {
+  max-height: 150px;
+  height: 150px;
+  margin-top: 100px;
+}
 .col-8 {
   margin-bottom: 1rem;
 }

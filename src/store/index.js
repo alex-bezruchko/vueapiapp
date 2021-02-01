@@ -10,12 +10,21 @@ export default new Vuex.Store({
   state: {
     newFavourite: {},
     favouritePosts: [],
-    allPosts: []
+    allPosts: [],
+    collectionLoading: false
   },
   actions: {
     async fetchPosts({ commit }) {
+      this.state.collectionLoading = true;
       const response = await axios.get(url);
-      commit("setPosts", response.data)
+      if (response.data) {
+        this.state.collectionLoading = false
+        commit("setCollectionLoading", false)
+        commit("setPosts", response.data)
+      } else {
+        commit("setCollectionLoading", false)
+
+      }
     },
     async fetchFavPosts({ commit }) {
       // const response = await axios.get(url);
@@ -34,6 +43,9 @@ export default new Vuex.Store({
   mutations: {
     setPosts: (state, posts) => (
       state.allPosts = posts
+    ),
+    setCollectionLoading: (state, loading) => (
+      state.collectionLoading = loading
     ),
     setFavPosts: (state, favPosts) => (
       state.favouritePosts = favPosts
@@ -55,7 +67,8 @@ export default new Vuex.Store({
   },
   getters: {
     collection: state => state.allPosts,
-    favourites: state => state.favouritePosts
+    favourites: state => state.favouritePosts,
+    collectionLoading: state => state.collectionLoading
 
   }
 });
