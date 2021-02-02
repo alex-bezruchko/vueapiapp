@@ -31,9 +31,7 @@ export default {
   },
   computed: mapGetters(["collection", "collectionLoading"]),
   created() {
-    // this.loading = true;
     this.fetchPosts();
-    // this.loading = false;
   },
 };
 </script>
