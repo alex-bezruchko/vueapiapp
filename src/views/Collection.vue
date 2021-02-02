@@ -21,11 +21,6 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "collection",
-  data() {
-    return {
-      loading: true,
-    };
-  },
   methods: {
     ...mapActions(["fetchPosts"]),
   },
