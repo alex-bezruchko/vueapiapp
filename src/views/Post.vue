@@ -9,7 +9,7 @@
 
     <!-- Edit/Delete Action buttons -->
     <b-container v-if="post" class="post-actions">
-      <router-link :to="{ name: 'editPost', params: { id: this.post.id } }"
+      <router-link :to="{ name: 'EditPost', params: { id: this.post.id } }"
         ><b-icon icon="pencil" scale="2" variant="warning"> </b-icon
       ></router-link>
       <b-icon
@@ -147,7 +147,6 @@ export default {
       .then((data) => (this.commentsTotal = data.length))
       .catch((err) => console.log(err.message));
   },
-  created() {},
 };
 </script>
 

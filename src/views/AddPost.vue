@@ -31,11 +31,6 @@
 
       <button @click="savePost" class="btn btn-success">Submit</button>
     </div>
-
-    <div v-else>
-      <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" @click="newPost">Add</button>
-    </div>
   </div>
 </template>
 
@@ -43,7 +38,7 @@
 import router from "./../router";
 
 export default {
-  name: "addPost",
+  name: "AddPost",
   data() {
     return {
       post: {
@@ -73,10 +68,9 @@ export default {
             this.show = true;
             this.showDismissibleAlert = true;
             setTimeout(function() {
-              router.push("/collection");
-
-              // Console log response of successfully post
+              // Console log response of successfully submitted post
               console.log(response);
+              router.push("/collection");
             }, 1800);
           } else {
             this.show = false;
@@ -84,12 +78,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-        }); // todo: add catch to catch an error
-    },
-
-    newPost() {
-      this.submitted = false;
-      this.post = {};
+        });
     },
   },
 };

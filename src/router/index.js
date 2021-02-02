@@ -30,7 +30,7 @@ const routes = [
   },
   {
     path: "/post/:id",
-    name: "postDetails",
+    name: "Post",
     component: Post,
     props: true
   },
@@ -42,7 +42,7 @@ const routes = [
   },
   {
     path: "/add-post",
-    name: "addPost",
+    name: "AddPost",
     component: AddPost,
     props: true
   }

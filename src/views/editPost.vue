@@ -6,10 +6,13 @@
       Post Edited Successfully. Redirecting...
     </b-alert>
 
-    <!-- Edit post input -->
+    <!-- Edit post form -->
 
     <div v-if="!submitted && post">
       <h1 class="page-title">Edit the Post</h1>
+
+      <!-- Edit title -->
+
       <div class="form-group">
         <input
           type="text"
@@ -21,6 +24,8 @@
           placeholder="Title"
         />
       </div>
+
+      <!-- Edit body -->
 
       <div class="form-group">
         <textarea
@@ -45,9 +50,7 @@
 import router from "./../router";
 
 export default {
-  name: "EditPost", // todo: rename to start with a capital letter like remaining components and files
-  props: ["id"],
-
+  name: "EditPost",
   data() {
     return {
       post: null,
@@ -57,7 +60,7 @@ export default {
     };
   },
   mounted() {
-    fetch("https://jsonplaceholder.typicode.com/posts/" + this.$route.params.id)
+    fetch(`https://jsonplaceholder.typicode.com/posts/${this.$route.params.id}`)
       .then((res) => res.json())
       .then((data) => (this.post = data))
       .catch((err) => console.log(err.message));
@@ -80,6 +83,7 @@ export default {
       )
         .then((response) => {
           if (response) {
+            console.log(response);
             this.show = true;
             this.showDismissibleAlert = true;
             setTimeout(function() {

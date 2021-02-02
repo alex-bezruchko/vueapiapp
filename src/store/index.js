@@ -4,25 +4,25 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-const url = "https://jsonplaceholder.typicode.com/posts/";
-
 export default new Vuex.Store({
   state: {
     newFavourite: {},
     favouritePosts: [],
-    collection: [],
+    collection: null,
     collectionLoading: false
   },
   actions: {
     async fetchPosts({ commit }) {
-      this.state.collectionLoading = true;
-      const response = await axios.get(url);
-      if (response.data) {
-        this.state.collectionLoading = false
+      commit("setCollectionLoading", true)
+
+      try {
+        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/`);
         commit("setCollectionLoading", false)
         commit("setPosts", response.data)
-      } else {
+      } catch (e) {
         commit("setCollectionLoading", false)
+        commit("setPosts", [])
+        console.log(e)
       }
     },
     async fetchFavPosts({ commit }) {

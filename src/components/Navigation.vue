@@ -23,12 +23,9 @@
       </b-collapse>
     </b-navbar>
   </b-container>
-  <!-- <b-container> -->
-  <!-- </b-container> -->
 </template>
 
 <script>
-// import route from "vue-router";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -48,7 +45,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .container-fluid {
   padding-right: 0px;

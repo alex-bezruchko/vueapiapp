@@ -1,10 +1,12 @@
 <template>
   <b-container>
+    <!-- Favourite Posts -->
+
     <h1 class="page-title">Favourites</h1>
     <b-row class="collection" align-h="center">
       <b-col cols="8" v-for="post in favourites" :key="post.id">
         <b-card>
-          <router-link :to="{ name: 'postDetails', params: { id: post.id } }"
+          <router-link :to="{ name: 'Post', params: { id: post.id } }"
             ><h3>{{ post.title }}</h3>
           </router-link>
         </b-card>
@@ -17,14 +19,11 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "favourites",
+  name: "Favourites",
   methods: {
     ...mapActions(["fetchFavPosts"]),
   },
   computed: mapGetters(["favourites"]),
-  //   created() {
-  //     this.fetchFavPosts();
-  //   },
 };
 </script>
 
